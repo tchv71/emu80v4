@@ -1,4 +1,4 @@
-dist: trusty    # Ubuntu 14.04
+dist: xenial    # Ubuntu 16.04
 
 sudo: required  # Virtual machine
 
@@ -12,17 +12,14 @@ compiler:
   - gcc
 
 env:
-  - QT=56 PPA=beineri/opt-qt563-trusty
-  - QT=57 PPA=beineri/opt-qt571-trusty
-#  - QT=58 PPA=beineri/opt-qt580-trusty
-  - QT=59 PPA=beineri/opt-qt595-trusty
+  - QT=57 PPA=beineri/opt-qt571-xenial
 
 before_install:
   - sudo add-apt-repository -y ppa:$PPA    # Add Qt repo
   - sudo apt-get -qy update                # Update repo
 
 install:
-  - sudo apt-get -qy install qt${QT}base qt${QT}multimedia    # install specific Qt version
+  - sudo apt-get -qy install qt${QT}base qt${QT}multimedia libgl1-mesa-dev   # install specific Qt version
 
 before_script:
   - '"$CXX" != clang++ || export QMAKESPEC=linux-clang'

@@ -106,9 +106,9 @@ ConfigWnd::ConfigWnd(wxWindow* parent)
 
 	wxString helpString2 =
         L"Alt-1..5\t– пресет: 1x-5x, автоподстройка размера окна, без сглаживания\n"
-        "Alt-6t– пресет: 2x3, автоподстройка размера окна, без сглаживания\n"
+        "Alt-6\t– пресет: 2x3, автоподстройка размера окна, без сглаживания\n"
         "Alt-7\t– пресет: 3x5, автоподстройка размера окна, без сглаживания\n"
-        "Alt-7\t– пресет: 4x6, автоподстройка размера окна, без сглаживания\n"
+        "Alt-8\t– пресет: 4x6, автоподстройка размера окна, без сглаживания\n"
         "Alt-9\t– пресет: измен. размер окна, растянуть, со сгл\n"
         "Alt-0\t– пресет: измен. размер окна, вписать, со сгл, учит. Aspect Ratio\n"
         "Alt-M\t– то же, что и Alt-0 + максимизировать окно\n"
@@ -118,6 +118,7 @@ ConfigWnd::ConfigWnd(wxWindow* parent)
         "Alt-V\t– переключить отображение только видимой области экрана\n"
         "Alt-N\t– переключить формат экрана 4:3 / 16:9\n"
         "Alt-H\t– скриншот экрана\n"
+        "Alt-Shift-Ins\t– копировать текстовый экран\n"
         "Alt-U\t– переключение беззвучного режима\n"
         "Alt-Enter\t– полноэкранный режим\n"
         "End\t– ускоренная работа при нажатой клавише (4x)\n"
@@ -333,11 +334,8 @@ wxRadioBox* ConfigWndTab::addRadioSelector(int column, wxString caption, wxStrin
 	wxRadioBox* radioBox = new wxRadioBox(m_tabPanel, wxID_ANY, caption, wxDefaultPosition, wxDefaultSize, nItems, items, 1, wxRA_SPECIFY_COLS, wxDefaultValidator, _T("ID_RADIOBOX2"));
 	radioBox->SetSelection(selectedItem);
 	m_tabVSizers[column - 1]->Add(radioBox, 0, wxTOP|wxLEFT|wxRIGHT|wxEXPAND, 5);
+    m_tabVSizers[column - 1]->Layout();
 	//m_radioBoxList.push_back(radioBox);
-
-	// некорректное позиционирование последнего RadioBox - workaround
-	for (int i = 0; i < 3; i++)
-        m_tabVSizers[i]->RecalcSizes();
 
 	m_tabHSizer->Fit(m_tabPanel);
 	m_tabHSizer->SetSizeHints(m_tabPanel);
